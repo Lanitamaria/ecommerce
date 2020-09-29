@@ -6,11 +6,11 @@ class Product < ApplicationRecord
   #has_many :orders, through: :order_items
 
   def visible_on_catalog?
+    contador = 0
     self.variants.each do |variant|
-      if variant > 0
-        return true
-      else
-        return false
-      end
+      contador = contador + variant.stock
+    end
+
+      (contador > 0) ? false : true
   end
 end
